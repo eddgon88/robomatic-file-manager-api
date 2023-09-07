@@ -11,6 +11,13 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
+class LocalConfig(Config):
+    ENV = "local"
+    DEBUG = True                              
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_ECHO = True
+
+
 class DevelopmentConfig(Config):
     ENV = "development"
     DEBUG = True
