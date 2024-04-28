@@ -1,7 +1,5 @@
 import os
 import base64
-from typing_extensions import Annotated
-from fastapi import Depends
 
 class GetFileService:
     @staticmethod
@@ -18,9 +16,9 @@ class GetFileService:
                 # add filename to list
                 with open(os.path.join(dir_path, file_path), "r") as f_in:
                     data = f_in.read()
-                data_bytes = data.encode('ascii')
+                data_bytes = data.encode('utf8')
                 base64_bytes = base64.b64encode(data_bytes)
-                base64_data = base64_bytes.decode('ascii')
+                base64_data = base64_bytes.decode('utf8')
                 res.append({
                     'file_name': file_path,
                     'file_content': base64_data,
