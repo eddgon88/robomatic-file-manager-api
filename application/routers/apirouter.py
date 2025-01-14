@@ -21,3 +21,8 @@ def convert_file(params: RequestParams):
 def get_files(test_execution):
     fileArray = GetFileService.get_list_test_execution(test_execution)
     return fileArray
+
+@router.get("/file/{test_execution}/{filename}")
+def get_file(test_execution, filename):
+     return GetFileService.get_file(test_execution, filename)
+    

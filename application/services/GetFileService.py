@@ -1,5 +1,12 @@
 import os
 import base64
+import logging
+from dotenv import load_dotenv
+
+load_dotenv()
+
+logging.basicConfig(level=logging.INFO,
+                    format='(%(threadName)-10s) %(message)s',)
 
 class GetFileService:
     @staticmethod
@@ -24,3 +31,13 @@ class GetFileService:
                     'file_content': base64_data,
                 })
         return res
+    
+    @staticmethod
+    def get_file(execution_id: str, filename: str):
+        EVIDENCE_FILE_DIR = os.getenv("EVIDENCE_FILE_DIR")
+        logging.info("EVIDENCE_FILE_DIR - %s", EVIDENCE_FILE_DIR)
+        logging.info("execution_id - %s", execution_id)
+        logging.info("filename - %s", filename)
+        dir_path = EVIDENCE_FILE_DIR + execution_id + "/" + filename
+        with open(dir_path, "rb") as f:
+            return f.read()
